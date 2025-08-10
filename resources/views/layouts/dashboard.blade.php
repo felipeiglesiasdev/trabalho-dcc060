@@ -20,7 +20,10 @@
         <nav>
             <ul>
                 <li><a href="{{ route('clientes.index') }}">Gerenciar Clientes</a></li>
-
+                <li><a href="{{ route('fornecedores.index') }}">Gerenciar Fornecedores</a></li>
+                <li><a href="{{ route('servicos.index') }}">Gerenciar Serviços</a></li>
+                <li><a href="{{ route('categorias.index') }}">Gerenciar Categorias</a></li>
+                
                 {{-- VERIFICA SE O USUÁRIO É ADMIN ANTES DE MOSTRAR O LINK --}}
                 @if(Auth::user()->tipo == 'admin')
                     <li><a href="{{ route('funcionarios.index') }}">Gerenciar Funcionários</a></li>

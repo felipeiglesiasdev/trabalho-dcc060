@@ -22,11 +22,17 @@ return new class extends Migration
             // DEFINE A CHAVE PRIMÁRIA COMPOSTA.
             $table->primary(['id_forn', 'id_produto']);
 
-            // DEFINE A CHAVE ESTRANGEIRA PARA O FORNECEDOR.
-            $table->foreign('id_forn')->references('id_forn')->on('fornecedor');
+            // QUANDO UM FORNECEDOR FOR DELETADO, APAGAR AS LIGAÇÕES EM CASCATA.
+            $table->foreign('id_forn')
+                  ->references('id_forn')
+                  ->on('fornecedor')
+                  ->onDelete('cascade'); 
 
-            // DEFINE A CHAVE ESTRANGEIRA PARA O PRODUTO.
-            $table->foreign('id_produto')->references('id_produto')->on('produto');
+            // O MESMO PARA PRODUTO.
+            $table->foreign('id_produto')
+                  ->references('id_produto')
+                  ->on('produto')
+                  ->onDelete('cascade');
         });
     }
 

@@ -33,7 +33,7 @@ class Fornecedor extends Model
     protected $fillable = [
         'id_forn',
         'nome',
-        'CNPJ',
+        'cnpj',
         'email',
     ];
 

@@ -40,9 +40,18 @@ class ClienteController extends Controller
             'cpf' => 'required|string|max:11|unique:cliente,cpf',
         ]);
 
+        //============================================================
+            // LÓGICA PARA GERAR UM ID NUMÉRICO ÚNICO
+            //============================================================
+            $idCliente = null;
+            do {
+                // GERA UM NÚMERO ALEATÓRIO DE 0 A 9999 E PREENCHE COM ZEROS À ESQUERDA PARA TER 4 DÍGITOS.
+                $idCliente = str_pad(random_int(0, 9999), 4, '0', STR_PAD_LEFT);
+            } while (Cliente::find($idCliente)); // VERIFICA SE O ID JÁ EXISTE NO BANCO.
+
         // CRIA O NOVO CLIENTE NO BANCO.
         Cliente::create([
-            'id_cliente' => Str::random(4), // GERA UM ID ALEATÓRIO.
+            'id_cliente' => $idCliente, // GERA UM ID ALEATÓRIO.
             'nome' => $request->nome,
             'cpf' => $request->cpf,
         ]);

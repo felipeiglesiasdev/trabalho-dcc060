@@ -17,5 +17,6 @@
     <div class="container">
         @yield('content')
     </div>
+    <script src="{{ asset('js/masks.js') }}"></script>
 </body>
 </html>

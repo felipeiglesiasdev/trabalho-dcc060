@@ -14,16 +14,16 @@ return new class extends Migration
         // CRIA A TABELA PIVOT 'SERVICOITEMSERVICO' NO BANCO DE DADOS.
         Schema::create('servicoItemServico', function (Blueprint $table) {
             // COLUNA PARA A CHAVE ESTRANGEIRA DO SERVIÇO.
-            $table->string('id_Serv', 4);
+            $table->string('id_servico', 4);
 
             // COLUNA PARA A CHAVE ESTRANGEIRA DO ITEM DE SERVIÇO.
             $table->string('id_ItServ', 4);
 
             // DEFINE A CHAVE PRIMÁRIA COMPOSTA.
-            $table->primary(['id_Serv', 'id_ItServ']);
+            $table->primary(['id_servico', 'id_ItServ']);
 
             // DEFINE A CHAVE ESTRANGEIRA PARA O SERVIÇO.
-            $table->foreign('id_Serv')->references('id_servico')->on('servico');
+            $table->foreign('id_servico')->references('id_servico')->on('servico');
 
             // DEFINE A CHAVE ESTRANGEIRA PARA O ITEM DE SERVIÇO.
             $table->foreign('id_ItServ')->references('id_produto')->on('itemServico');

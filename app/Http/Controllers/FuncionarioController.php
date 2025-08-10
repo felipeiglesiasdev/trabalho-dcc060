@@ -38,13 +38,22 @@ class FuncionarioController extends Controller
             'nome' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:usuario',
             'password' => 'required|string|min:1|confirmed',
-            'especialidade' => 'required|string|max:30',
+            'especialidade' => 'required|string|max:255',
             'salário' => 'required|numeric|min:0',
         ]);
 
+
         // USA UMA TRANSAÇÃO PARA GARANTIR QUE OS DOIS REGISTROS SEJAM CRIADOS COM SUCESSO.
         DB::transaction(function () use ($request) {
-            $idUsuario = Str::random(4);
+
+            //============================================================
+            // LÓGICA PARA GERAR UM ID NUMÉRICO ÚNICO
+            //============================================================
+            $idUsuario = null;
+            do {
+                // GERA UM NÚMERO ALEATÓRIO DE 0 A 9999 E PREENCHE COM ZEROS À ESQUERDA PARA TER 4 DÍGITOS.
+                $idUsuario = str_pad(random_int(0, 9999), 4, '0', STR_PAD_LEFT);
+            } while (Usuario::find($idUsuario)); // VERIFICA SE O ID JÁ EXISTE NO BANCO.
 
             // 1. CRIA O REGISTRO NA TABELA 'USUARIO'.
             $usuario = Usuario::create([
@@ -86,9 +95,9 @@ class FuncionarioController extends Controller
     public function update(Request $request, Usuario $funcionario)
     {
         $request->validate([
-            'nome' => 'required|string|max:10',
+            'nome' => 'required|string|max:255',
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('usuario')->ignore($funcionario->id_usuario, 'id_usuario')],
-            'especialidade' => 'required|string|max:30',
+            'especialidade' => 'required|string|max:255',
             'salário' => 'required|numeric|min:0',
         ]);
 
@@ -102,6 +111,8 @@ class FuncionarioController extends Controller
             // 2. ATUALIZA OS DADOS NA TABELA 'FUNCIONARIO'.
             if ($funcionario->funcionario) {
                 $funcionario->funcionario->update([
+                    'nome' => $request->nome,
+                    'email' => $request->email,
                     'especialidade' => $request->especialidade,
                     'salário' => $request->salário,
                 ]);

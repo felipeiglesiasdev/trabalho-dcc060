@@ -1,7 +1,10 @@
 <?php
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\ServicoController;
 use App\Http\Controllers\FuncionarioController;
+use App\Http\Controllers\FornecedorController;
+use App\Http\Controllers\CategoriaController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -55,6 +58,20 @@ Route::middleware('auth')->group(function () {
     // ROTAS PARA O CRUD DE FUNCIONÁRIOS (PROTEGIDO DENTRO DO CONTROLLER)
     Route::resource('funcionarios', FuncionarioController::class)->parameters(['funcionarios' => 'funcionario']);
     //============================================================
-    
+
+    //============================================================
+    // ROTAS PARA O CRUD DE FORNECEDORES
+    Route::resource('fornecedores', FornecedorController::class)->parameters(['fornecedores' => 'fornecedor']);
+    //============================================================
+
+    //============================================================
+    // ROTAS PARA O CRUD DE SERVIÇOS
+    Route::resource('servicos', ServicoController::class)->parameters(['servicos' => 'servico']);
+    //============================================================
+
+    //============================================================
+    // ROTAS PARA O CRUD DE SERVIÇOS
+    Route::resource('categorias', CategoriaController::class)->parameters(['categorias' => 'categoria']);
+    //============================================================
 
 });

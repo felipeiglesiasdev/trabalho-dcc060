@@ -17,10 +17,10 @@ return new class extends Migration
             $table->string('id_cat', 4)->primary();
 
             // COLUNA PARA O NOME DA CATEGORIA, VARCHAR DE 30.
-            $table->string('nome', 30);
+            $table->string('nome', 255);
 
             // COLUNA PARA A MARCA, VARCHAR DE 10.
-            $table->string('marca', 10);
+            $table->string('marca', 255);
         });
     }
 

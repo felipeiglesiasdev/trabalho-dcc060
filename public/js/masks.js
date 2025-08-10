@@ -43,4 +43,41 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     }
+
+
+    //============================================================
+    // MÁSCARA DE CNPJ
+    //============================================================
+    const cnpjInput = document.getElementById('cnpj');
+    if (cnpjInput) {
+        // APLICA A MÁSCARA ENQUANTO O USUÁRIO DIGITA.
+        cnpjInput.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            value = value.substring(0, 14);
+
+            if (value.length > 12) {
+                // Formato: ##.###.###/####-##
+                value = value.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
+            } else if (value.length > 8) {
+                // Formato: ##.###.###/####
+                value = value.replace(/^(\d{2})(\d{3})(\d{3})(\d{1,4})/, '$1.$2.$3/$4');
+            } else if (value.length > 5) {
+                // Formato: ##.###.###
+                value = value.replace(/^(\d{2})(\d{3})(\d{1,3})/, '$1.$2.$3');
+            } else if (value.length > 2) {
+                // Formato: ##.###
+                value = value.replace(/^(\d{2})(\d{1,3})/, '$1.$2');
+            }
+            e.target.value = value;
+        });
+
+        // REMOVE A MÁSCARA ANTES DE O FORMULÁRIO SER ENVIADO.
+        const form = cnpjInput.closest('form');
+        if (form) {
+            form.addEventListener('submit', function() {
+                cnpjInput.value = cnpjInput.value.replace(/\D/g, '');
+            });
+        }
+    }
+
 });

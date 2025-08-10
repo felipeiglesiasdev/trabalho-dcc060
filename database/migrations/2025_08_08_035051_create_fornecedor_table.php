@@ -17,13 +17,13 @@ return new class extends Migration
             $table->string('id_forn', 4)->primary();
 
             // COLUNA PARA O NOME DO FORNECEDOR, VARCHAR DE 30.
-            $table->string('nome', 30);
+            $table->string('nome', 255);
 
             // COLUNA PARA O CNPJ, VARCHAR DE 15.
             $table->string('cnpj', 15);
 
             // COLUNA PARA O EMAIL, VARCHAR DE 30.
-            $table->string('email', 30);
+            $table->string('email', 255);
         });
     }
 

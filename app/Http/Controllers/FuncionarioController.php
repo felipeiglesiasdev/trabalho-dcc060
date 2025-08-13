@@ -39,7 +39,7 @@ class FuncionarioController extends Controller
             'email' => 'required|string|email|max:255|unique:usuario',
             'password' => 'required|string|min:1|confirmed',
             'especialidade' => 'required|string|max:255',
-            'salário' => 'required|numeric|min:0',
+            'salario' => 'required|numeric|min:0',
         ]);
 
 
@@ -71,7 +71,7 @@ class FuncionarioController extends Controller
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
                 'especialidade' => $request->especialidade,
-                'salário' => $request->salário,
+                'salario' => $request->salario,
                 'data_admissao' => now(),
             ]);
         });
@@ -98,7 +98,7 @@ class FuncionarioController extends Controller
             'nome' => 'required|string|max:255',
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('usuario')->ignore($funcionario->id_usuario, 'id_usuario')],
             'especialidade' => 'required|string|max:255',
-            'salário' => 'required|numeric|min:0',
+            'salario' => 'required|numeric|min:0',
         ]);
 
         DB::transaction(function () use ($request, $funcionario) {
@@ -114,7 +114,7 @@ class FuncionarioController extends Controller
                     'nome' => $request->nome,
                     'email' => $request->email,
                     'especialidade' => $request->especialidade,
-                    'salário' => $request->salário,
+                    'salario' => $request->salario,
                 ]);
             }
         });
@@ -127,12 +127,25 @@ class FuncionarioController extends Controller
     //============================================================
     public function destroy(Usuario $funcionario)
     {
+        // USA O RELACIONAMENTO PARA VERIFICAR SE EXISTEM REGISTROS ASSOCIADOS.
+        // O MÉTODO 'EXISTS()' É MAIS EFICIENTE QUE 'COUNT() > 0'.
+        $temOrdensDeServico = $funcionario->funcionario->ordemServicos()->exists();
+        $temVendas = $funcionario->funcionario->vendas()->exists();
+        
+        // VERIFICA SE O FUNCIONÁRIO TEM ALGUMA LIGAÇÃO.
+        if ($temOrdensDeServico || $temVendas) {
+            // SE TIVER, RETORNA PARA A PÁGINA ANTERIOR COM UMA MENSAGEM DE ERRO.
+            return redirect()->route('funcionarios.index')
+                             ->with('error', 'Não é possível excluir este funcionário, pois ele está associado a ordens de serviço ou vendas.');
+        }
+
+        // SE NÃO HOUVER LIGAÇÕES, PROSSEGUE COM A EXCLUSÃO.
         DB::transaction(function () use ($funcionario) {
-            // COMO A CHAVE ESTRANGEIRA ESTÁ EM 'FUNCIONARIO', PRECISAMOS DELETAR ELE PRIMEIRO.
+            // DELETA PRIMEIRO O REGISTRO 'FILHO' NA TABELA FUNCIONARIO.
             if ($funcionario->funcionario) {
                 $funcionario->funcionario->delete();
             }
-            // DEPOIS DELETAMOS O USUÁRIO.
+            // DEPOIS DELETA O REGISTRO 'PAI' NA TABELA USUARIO.
             $funcionario->delete();
         });
 

@@ -29,7 +29,7 @@ return new class extends Migration
             $table->string('especialidade', 30);
 
             // COLUNA PARA O SALÁRIO, DO TIPO FLOAT.
-            $table->float('salário');
+            $table->float('salario');
 
             // COLUNA PARA A DATA DE ADMISSÃO, DO TIPO TIMESTAMP.
             $table->timestamp('data_admissao')->nullable();

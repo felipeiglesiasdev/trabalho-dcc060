@@ -36,7 +36,7 @@ class Funcionario extends Model
         'email',
         'password',
         'especialidade',
-        'salário',
+        'salario',
         'data_admissao',
     ];
 

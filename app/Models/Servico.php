@@ -52,6 +52,6 @@ class Servico extends Model
     public function itemServicos()
     {
         // UM SERVIÇO PODE CONTER VÁRIOS ITENS DE SERVIÇO.
-        return $this->belongsToMany(ItemServico::class, 'servicoItemServico', 'id_Serv', 'id_ItServ');
+        return $this->belongsToMany(ItemServico::class, 'servicoItemServico', 'id_servico', 'id_ItServ');
     }
 }

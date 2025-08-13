@@ -1,10 +1,20 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    <h1>{{ isset($categoria) ? 'Editar Categoria' : 'Cadastrar Nova Categoria' }}</h1>
+<div class="content-header">
+    <h1 class="content-title">
+        <i class="bi bi-{{ isset($categoria) ? 'pencil' : 'plus-circle' }}"></i>
+        {{ isset($categoria) ? 'Editar Categoria' : 'Cadastrar Nova Categoria' }}
+    </h1>
+    <p class="content-subtitle">
+        {{ isset($categoria) ? 'Atualize as informações da categoria' : 'Adicione uma nova categoria ao sistema' }}
+    </p>
+</div>
 
+<div class="content-body">
     @if ($errors->any())
-        <div class="alert-danger">
+        <div class="alert alert-danger">
+            <i class="bi bi-exclamation-triangle"></i>
             <ul>
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
@@ -13,22 +23,54 @@
         </div>
     @endif
 
-    <form action="{{ isset($categoria) ? route('categorias.update', $categoria) : route('categorias.store') }}" method="POST">
-        @csrf
-        @if(isset($categoria))
-            @method('PUT')
-        @endif
+    <div class="form-container">
+        <form action="{{ isset($categoria) ? route('categorias.update', $categoria) : route('categorias.store') }}" method="POST">
+            @csrf
+            @if(isset($categoria))
+                @method('PUT')
+            @endif
 
-        <div class="form-group">
-            <label for="nome">Nome da Categoria</label>
-            <input type="text" id="nome" name="nome" value="{{ old('nome', $categoria->nome ?? '') }}" required>
-        </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="nome">
+                        <i class="bi bi-tag"></i>
+                        Nome da Categoria
+                    </label>
+                    <div class="input-group">
+                        <i class="bi bi-tag"></i>
+                        <input type="text" id="nome" name="nome" value="{{ old('nome', $categoria->nome ?? '') }}" required placeholder="Digite o nome da categoria">
+                    </div>
+                </div>
 
-        <div class="form-group">
-            <label for="marca">Marca</label>
-            <input type="text" id="marca" name="marca" value="{{ old('marca', $categoria->marca ?? '') }}" required>
-        </div>
+                <div class="form-group">
+                    <label for="marca">
+                        <i class="bi bi-building"></i>
+                        Marca
+                    </label>
+                    <div class="input-group">
+                        <i class="bi bi-building"></i>
+                        <input type="text" id="marca" name="marca" value="{{ old('marca', $categoria->marca ?? '') }}" required placeholder="Digite a marca">
+                    </div>
+                </div>
+            </div>
 
-        <button type="submit" class="btn-save">{{ isset($categoria) ? 'Atualizar' : 'Salvar' }}</button>
-    </form>
+            <div class="d-flex justify-content-end gap-2">
+                <button type="submit" class="btn btn-success">
+                    <i class="bi bi-{{ isset($categoria) ? 'check-circle' : 'save' }}"></i>
+                    {{ isset($categoria) ? 'Atualizar' : 'Salvar' }}
+                </button>
+                @if(isset($categoria))
+                    <form action="{{ route('categorias.destroy', $categoria) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir a categoria \'{{ $categoria->nome }}\'? Esta ação não pode ser desfeita.');">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">
+                            <i class="bi bi-trash"></i>
+                            Excluir
+                        </button>
+                    </form>
+                @endif
+            </div>
+        </form>
+    </div>
+</div>
 @endsection

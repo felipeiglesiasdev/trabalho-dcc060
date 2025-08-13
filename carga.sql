@@ -184,25 +184,3 @@ INSERT INTO `vendaItemVenda` (`id_ItVenda`, `id_venda`) VALUES
 
 
 
-UPDATE funcionario
-SET salario = funcionario.salario * 1.50
-FROM usuario
-WHERE usuario.tipo = 'gerente' AND funcionario.id_Usu = usuario.id;
-
-UPDATE funcionario
-SET salario = funcionario.salario * 1.25
-FROM usuario
-WHERE usuario.tipo <> 'gerente' AND funcionario.id_Usu = usuario.id;
-
-UPDATE ordemServico
-SET status = 'concluído'
-WHERE status = 'andamento';
-
-DELETE FROM fornece
-WHERE id_Forn = '0003'
-
-DELETE FROM vendaItemVenda
-WHERE id_ItVenda = '0003'
-
-DELETE FROM servicoItemServico
-WHERE id_Serv = '0002'

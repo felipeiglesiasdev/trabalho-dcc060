@@ -5,9 +5,19 @@
 
     <a href="{{ route('funcionarios.create') }}" class="btn-create">Adicionar Novo Funcionário</a>
 
+    {{-- MOSTRA MENSAGEM DE SUCESSO --}}
     @if(session('success'))
         <div class="alert-success">
             {{ session('success') }}
+        </div>
+    @endif
+
+    {{-- ============================================================ --}}
+    {{-- CÓDIGO ADICIONADO PARA MOSTRAR A MENSAGEM DE ERRO          --}}
+    {{-- ============================================================ --}}
+    @if(session('error'))
+        <div class="alert-danger">
+            {{ session('error') }}
         </div>
     @endif
 
@@ -30,7 +40,7 @@
                     <td>{{ $funcionario->email }}</td>
                     {{-- USAMOS O '?' PARA EVITAR ERRO SE O FUNCIONÁRIO AINDA NÃO TIVER DADOS --}}
                     <td>{{ $funcionario->funcionario->especialidade ?? 'N/A' }}</td>
-                    <td>R$ {{ number_format($funcionario->funcionario->salário ?? 0, 2, ',', '.') }}</td>
+                    <td>R$ {{ number_format($funcionario->funcionario->salario ?? 0, 2, ',', '.') }}</td>
                     <td class="actions">
                         <a href="{{ route('funcionarios.edit', $funcionario) }}" class="btn-edit">Editar</a>
                         <form action="{{ route('funcionarios.destroy', $funcionario) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir este funcionário?');">

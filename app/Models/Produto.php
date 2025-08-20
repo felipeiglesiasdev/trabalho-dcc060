@@ -51,7 +51,7 @@ class Produto extends Model
     public function fornecedores()
     {
         // UM PRODUTO PODE SER FORNECIDO POR VÁRIOS FORNECEDORES.
-        return $this->belongsToMany(Fornecedor::class, 'fornece', 'id_produto', 'id_forn');
+        return $this->belongsToMany(Fornecedor::class, 'fornece', 'id_produto', 'id_fornecedor');
     }
 
     // RELAÇÃO 1-1 COM ITEMVENDA.

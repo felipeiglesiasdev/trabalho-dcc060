@@ -95,12 +95,17 @@ class FornecedorController extends Controller
     //============================================================
     // EXCLUIR FORNECEDOR (DELETE)
     //============================================================
-    public function destroy(Fornecedor $fornecedor)
+    public function destroy($id)
     {
-        // EXCLUI O FORNECEDOR DO BANCO DE DADOS.
+        $fornecedor = Fornecedor::findOrFail($id);
+
+        // Verifica se o fornecedor está na pivot "fornece"
+        if ($fornecedor->produtos()->exists()) {
+            return redirect()->back()->with('error', 'Não é possível excluir este fornecedor, pois ele fornece produtos.');
+        }
+
         $fornecedor->delete();
 
-        // REDIRECIONA DE VOLTA PARA A LISTA COM MENSAGEM DE SUCESSO.
-        return redirect()->route('fornecedores.index')->with('success', 'Fornecedor excluído com sucesso!');
+        return redirect()->route('fornecedores.index')->with('success', 'Fornecedor excluído com sucesso.');
     }
 }

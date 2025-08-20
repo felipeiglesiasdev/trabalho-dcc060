@@ -91,12 +91,17 @@ class ClienteController extends Controller
     //============================================================
     // EXCLUIR CLIENTE (DELETE)
     //============================================================
-    public function destroy(Cliente $cliente)
+    public function destroy($id)
     {
-        // EXCLUI O CLIENTE DO BANCO DE DADOS.
+        $cliente = Cliente::findOrFail($id);
+
+        // Verifica se existe ordem de serviço vinculada
+        if ($cliente->ordemServicos()->exists()) {
+            return redirect()->back()->with('error', 'Não é possível excluir este cliente, pois ele possui ordens de serviço vinculadas.');
+        }
+
         $cliente->delete();
 
-        // REDIRECIONA DE VOLTA PARA A LISTA COM MENSAGEM DE SUCESSO.
-        return redirect()->route('clientes.index')->with('success', 'Cliente excluído com sucesso!');
+        return redirect()->route('clientes.index')->with('success', 'Cliente excluído com sucesso.');
     }
 }

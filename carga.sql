@@ -172,7 +172,7 @@ INSERT INTO `servicoItemServico` (`id_servico`, `id_ItServ`) VALUES
 ('2003', '6005'), ('2001', '6003'), ('2004', '6002'), ('2007', '6007'), ('2005', '6008');
 
 -- Tabela: fornece
-INSERT INTO `fornece` (`id_fornecedor`, `id_produto`) VALUES
+INSERT INTO `fornece` (`id_forn`, `id_produto`) VALUES
 ('5004', '6001'), ('5001', '6002'), ('5002', '6003'), ('5005', '6004'), ('5003', '6005'),
 ('5006', '6006'), ('5007', '6007'), ('5008', '6008'), ('5009', '6009'), ('5010', '6010');
 

@@ -31,46 +31,37 @@
             @endif
 
             <div class="form-row">
-                <div class="form-group">
-                    <label for="nome">
-                        <i class="bi bi-tag"></i>
-                        Nome da Categoria
-                    </label>
-                    <div class="input-group">
-                        <i class="bi bi-tag"></i>
-                        <input type="text" id="nome" name="nome" value="{{ old('nome', $categoria->nome ?? '') }}" required placeholder="Digite o nome da categoria">
+                    <div class="form-group">
+                        <label for="nome">
+                            <i class="bi bi-tag"></i>
+                            Nome da Categoria
+                        </label>
+                        <div class="input-group">
+                            <i class="bi bi-tag"></i>
+                            <input type="text" id="nome" name="nome" value="{{ old('nome', $categoria->nome ?? '') }}" required placeholder="Digite o nome da categoria">
+                        </div>
                     </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="marca">
-                        <i class="bi bi-building"></i>
-                        Marca
-                    </label>
-                    <div class="input-group">
-                        <i class="bi bi-building"></i>
-                        <input type="text" id="marca" name="marca" value="{{ old('marca', $categoria->marca ?? '') }}" required placeholder="Digite a marca">
+                    <div class="form-group">
+                        <label for="marca">
+                            <i class="bi bi-building"></i>
+                            Marca
+                        </label>
+                        <div class="input-group">
+                            <i class="bi bi-building"></i>
+                            <input type="text" id="marca" name="marca" value="{{ old('marca', $categoria->marca ?? '') }}" required placeholder="Digite a marca">
+                        </div>
                     </div>
+                <div class="d-flex justify-content-end gap-2">
+                    <button type="submit" class="btn btn-success">
+                        <i class="bi bi-{{ isset($categoria) ? 'check-circle' : 'save' }}"></i>
+                        {{ isset($categoria) ? 'Atualizar' : 'Salvar' }}
+                    </button>
                 </div>
             </div>
-
-            <div class="d-flex justify-content-end gap-2">
-                <button type="submit" class="btn btn-success">
-                    <i class="bi bi-{{ isset($categoria) ? 'check-circle' : 'save' }}"></i>
-                    {{ isset($categoria) ? 'Atualizar' : 'Salvar' }}
-                </button>
-                @if(isset($categoria))
-                    <form action="{{ route('categorias.destroy', $categoria) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir a categoria \'{{ $categoria->nome }}\'? Esta ação não pode ser desfeita.');">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger">
-                            <i class="bi bi-trash"></i>
-                            Excluir
-                        </button>
-                    </form>
-                @endif
-            </div>
-        </form>
     </div>
+
+
+
+    
 </div>
 @endsection

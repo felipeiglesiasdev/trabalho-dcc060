@@ -24,10 +24,7 @@
     @endif
 
     <div class="form-container">
-        <h2 class="form-title">
-            <i class="bi bi-person-fill"></i>
-            Dados do Funcionário
-        </h2>
+
 
         <form action="{{ isset($funcionario) ? route('funcionarios.update', $funcionario) : route('funcionarios.store') }}" method="POST">
             @csrf
@@ -97,7 +94,6 @@
                         <input type="text" id="especialidade" name="especialidade" value="{{ old('especialidade', $funcionario->funcionario->especialidade ?? '') }}" placeholder="Digite a especialidade" required>
                     </div>
                 </div>
-
                 <div class="form-group">
                     <label for="salario">
                         <i class="bi bi-currency-dollar"></i>
@@ -109,9 +105,8 @@
                     </div>
                 </div>
             </div>
-
-            <div class="form-group mt-3">
-                <button type="submit" class="btn btn-save">
+            <div class="form-group mt-3 form-actions">
+                <button type="submit" class="btn btn-save btn-success">
                     <i class="bi bi-{{ isset($funcionario) ? 'arrow-repeat' : 'check-circle' }}"></i>
                     {{ isset($funcionario) ? 'Atualizar Funcionário' : 'Salvar Funcionário' }}
                 </button>

@@ -68,7 +68,6 @@ class FornecedorController extends Controller
     //============================================================
     public function edit(Fornecedor $fornecedor)
     {
-        // O LARAVEL JÁ ENCONTRA O FORNECEDOR PELO ID NA ROTA.
         // RETORNA A VIEW DO FORMULÁRIO, PASSANDO O FORNECEDOR QUE SERÁ EDITADO.
         return view('fornecedores.form', compact('fornecedor'));
     }
@@ -99,7 +98,7 @@ class FornecedorController extends Controller
     {
         $fornecedor = Fornecedor::findOrFail($id);
 
-        // Verifica se o fornecedor está na pivot "fornece"
+        // Verifica se o fornecedor está na tabela "fornece"
         if ($fornecedor->produtos()->exists()) {
             return redirect()->back()->with('error', 'Não é possível excluir este fornecedor, pois ele fornece produtos.');
         }

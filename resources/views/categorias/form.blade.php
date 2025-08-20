@@ -51,12 +51,17 @@
                             <input type="text" id="marca" name="marca" value="{{ old('marca', $categoria->marca ?? '') }}" required placeholder="Digite a marca">
                         </div>
                     </div>
-                <div class="d-flex justify-content-end gap-2">
-                    <button type="submit" class="btn btn-success">
-                        <i class="bi bi-{{ isset($categoria) ? 'check-circle' : 'save' }}"></i>
-                        {{ isset($categoria) ? 'Atualizar' : 'Salvar' }}
-                    </button>
-                </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-success">
+                            <i class="bi {{ isset($categoria) ? 'bi-check-circle' : 'bi-save' }}"></i>
+                            {{ isset($categoria) ? 'Atualizar' : 'Salvar' }}
+                        </button>
+                        <a href="{{ route('categorias.index') }}" class="btn btn-secondary">
+                            <i class="bi bi-arrow-left"></i>
+                            Voltar à Lista
+                        </a>
+                    </div>
             </div>
     </div>
 

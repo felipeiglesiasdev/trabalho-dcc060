@@ -123,29 +123,6 @@
         @endif
     </div>
 
-    {{-- ESTATÍSTICAS RÁPIDAS --}}
-    <div class="row mt-4">
-        <div class="col-md-4">
-            <div class="dashboard-card text-center">
-                <i class="bi bi-people-fill" style="font-size: 2rem; color: var(--primary-color);"></i>
-                <h4 class="mt-2">{{ $clientes->count() }}</h4>
-                <p class="text-muted">Total de Clientes</p>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="dashboard-card text-center">
-                <i class="bi bi-person-plus" style="font-size: 2rem; color: var(--accent-color);"></i>
-                <h4 class="mt-2">0</h4>
-                <p class="text-muted">Novos Clientes (Mês)</p>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="dashboard-card text-center">
-                <i class="bi bi-clock-history" style="font-size: 2rem; color: var(--success-color);"></i>
-                <h4 class="mt-2">Hoje</h4>
-                <p class="text-muted">Última Atualização</p>
-            </div>
-        </div>
-    </div>
+
 </div>
 @endsection

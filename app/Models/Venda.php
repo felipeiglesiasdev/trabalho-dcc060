@@ -10,26 +10,21 @@ class Venda extends Model
     // CONFIGURAÇÕES DO MODEL VENDA
     //============================================================
 
-    // INDICA AO LARAVEL O NOME EXATO DA TABELA NO BANCO.
+    // NOME EXATO DA TABELA NO BANCO.
     protected $table = 'venda';
 
-    // AVISA QUE A CHAVE PRIMÁRIA É 'ID_VENDA'.
+    // CHAVE PRIMÁRIA É 'ID_VENDA'.
     protected $primaryKey = 'id_venda';
 
-    // INFORMA QUE A CHAVE PRIMÁRIA NÃO É UM NÚMERO QUE SE AUTO-INCREMENTA.
+    // CHAVE PRIMÁRIA NÃO É UM NÚMERO QUE SE AUTO-INCREMENTA.
     public $incrementing = false;
 
-    // COMO A CHAVE PRIMÁRIA É UMA STRING (VARCHAR), PRECISAMOS DEFINIR O TIPO DELA.
+    // COMO A CHAVE PRIMÁRIA É UMA STRING (VARCHAR)
     protected $keyType = 'string';
 
-    // A TABELA NÃO TEM AS COLUNAS 'CREATED_AT' E 'UPDATED_AT'.
     public $timestamps = false;
 
-    //============================================================
-    // ATRIBUTOS PREENCHÍVEIS (MASS ASSIGNMENT)
-    //============================================================
 
-    // DEFINE QUAIS COLUNAS PODEM SER PREENCHIDAS EM MASSA.
     protected $fillable = [
         'id_venda',
         'nome',

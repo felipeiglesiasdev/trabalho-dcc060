@@ -50,27 +50,27 @@ Route::middleware('auth')->group(function () {
 
 
     //============================================================
-    // ROTAS PARA O CRUD DE CLIENTES (INDEX, CREATE, STORE, EDIT, UPDATE, DESTROY)
+    // ROTA PARA O CRUD DE CLIENTES 
     Route::resource('clientes', ClienteController::class);
     //============================================================
 
     //============================================================
-    // ROTAS PARA O CRUD DE FUNCIONÁRIOS (PROTEGIDO DENTRO DO CONTROLLER)
+    // ROTA PARA O CRUD DE FUNCIONÁRIOS 
     Route::resource('funcionarios', FuncionarioController::class)->parameters(['funcionarios' => 'funcionario']);
     //============================================================
 
     //============================================================
-    // ROTAS PARA O CRUD DE FORNECEDORES
+    // ROTA PARA O CRUD DE FORNECEDORES
     Route::resource('fornecedores', FornecedorController::class)->parameters(['fornecedores' => 'fornecedor']);
     //============================================================
 
     //============================================================
-    // ROTAS PARA O CRUD DE SERVIÇOS
+    // ROTA PARA O CRUD DE SERVIÇOS
     Route::resource('servicos', ServicoController::class)->parameters(['servicos' => 'servico']);
     //============================================================
 
     //============================================================
-    // ROTAS PARA O CRUD DE SERVIÇOS
+    // ROTA PARA O CRUD DE SERVIÇOS
     Route::resource('categorias', CategoriaController::class)->parameters(['categorias' => 'categoria']);
     //============================================================
 

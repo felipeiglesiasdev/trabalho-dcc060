@@ -123,29 +123,6 @@
         @endif
     </div>
 
-    {{-- ESTATÍSTICAS RÁPIDAS --}}
-    <div class="row mt-4">
-        <div class="col-md-4">
-            <div class="dashboard-card text-center">
-                <i class="bi bi-grid-3x3-gap" style="font-size: 2rem; color: var(--primary-color);"></i>
-                <h4 class="mt-2">{{ $categorias->count() }}</h4>
-                <p class="text-muted">Total de Categorias</p>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="dashboard-card text-center">
-                <i class="bi bi-building" style="font-size: 2rem; color: var(--accent-color);"></i>
-                <h4 class="mt-2">{{ $categorias->pluck('marca')->unique()->count() }}</h4>
-                <p class="text-muted">Marcas Diferentes</p>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="dashboard-card text-center">
-                <i class="bi bi-clock-history" style="font-size: 2rem; color: var(--success-color);"></i>
-                <h4 class="mt-2">Hoje</h4>
-                <p class="text-muted">Última Atualização</p>
-            </div>
-        </div>
-    </div>
+    
 </div>
 @endsection

@@ -1,13 +1,17 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    <div class="form-header">
-        {{-- O TÍTULO E ÍCONE MUDAM SE ESTAMOS EDITANDO OU CRIANDO --}}
-        <h1>
-            <i class="bi {{ isset($cliente) ? 'bi-pencil' : 'bi-plus-circle' }}"></i>
-            {{ isset($cliente) ? 'Editar Cliente' : 'Cadastrar Novo Cliente' }}
-        </h1>
-    </div>
+<div class="content-header">
+    <h1 class="content-title">
+        <i class="bi {{ isset($cliente) ? 'bi-pencil' : 'bi-plus-circle' }}"></i>
+        {{ isset($cliente) ? 'Editar Cliente' : 'Cadastrar Novo Cliente' }}
+    </h1>
+    <p class="content-subtitle">
+        {{ isset($cliente) ? 'Atualize as informações do cliente' : 'Preencha os dados para cadastrar um novo cliente' }}
+    </p>
+</div>
+
+
 
     {{-- MOSTRA ERROS DE VALIDAÇÃO --}}
     @if ($errors->any())
@@ -20,6 +24,7 @@
         </div>
     @endif
 
+    <div class="content-body">
     <div class="form-container">
         {{-- O FORMULÁRIO APONTA PARA A ROTA DE UPDATE OU STORE --}}
         <form action="{{ isset($cliente) ? route('clientes.update', $cliente) : route('clientes.store') }}" method="POST">
@@ -57,19 +62,14 @@
                     <i class="bi {{ isset($cliente) ? 'bi-check-circle' : 'bi-save' }}"></i>
                     {{ isset($cliente) ? 'Atualizar' : 'Salvar' }}
                 </button>
+                <a href="{{ route('clientes.index') }}" class="btn btn-secondary">
+                    <i class="bi bi-arrow-left"></i>
+                    Voltar à Lista
+                </a>
             </div>
         </form>
 
-        {{-- FORMULÁRIO DE EXCLUSÃO (APARECE APENAS NA EDIÇÃO) --}}
-        @if(isset($cliente))
-            <form action="{{ route('clientes.destroy', $cliente) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir este cliente? Esta ação não pode ser desfeita.');" class="delete-form">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn btn-danger">
-                    <i class="bi bi-trash"></i>
-                    Excluir Cliente
-                </button>
-            </form>
-        @endif
+    
+    </div>
     </div>
 @endsection
